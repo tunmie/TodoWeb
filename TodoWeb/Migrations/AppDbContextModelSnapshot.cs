@@ -37,7 +37,6 @@ namespace TodoWeb.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

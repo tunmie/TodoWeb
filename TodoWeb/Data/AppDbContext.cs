@@ -7,7 +7,7 @@ namespace TodoWeb.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Host=localhost; Database=todoweb_db; Username=postgres; Password=passw@rd";
+            var connectionString = "Host=containers-us-west-22.railway.app; Port=6460; Database=railway; Username=postgres; Password=hWzQ3q78TcB6V9hSQoUI";
             optionsBuilder.UseNpgsql(connectionString);
         }
         
