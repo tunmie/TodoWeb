@@ -1,0 +1,160 @@
+@page
+@model IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            background-color: #F1F1F1;
+            font-family: 'Raleway', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .todo-input-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f5f5f5;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        
+        .todo-input {
+            flex-grow: 1;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        
+        .add-btn {
+            background-color: #4caf50;
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        .todo-container {
+            width: 400px;
+            padding: 2rem;
+            background-color: #FFFFFF;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1E90FF;
+        }
+
+        .todo-input {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            transition: border-color 0.3s ease;
+        }
+
+        .todo-input:focus {
+            border-color: #1E90FF;
+        }
+
+        .todo-list {
+            margin-top: 2rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ccc;
+            transition: transform 0.3s ease;
+        }
+
+        .todo-item:last-child {
+            border-bottom: none;
+        }
+
+        .todo-item:hover {
+            transform: translateX(10px);
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 1rem;
+        }
+
+        .delete-btn {
+            background-color: transparent;
+            border: none;
+            color: #FF0000;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            color: #FF4500;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="todo-container">
+        <h1>Todo App</h1>
+        <form method="post" asp-page-handler="AddTodo">
+            <div class="todo-input-container">
+                <input type="text" class="todo-input" placeholder="Add a new todo" id="newTodoInput" asp-for="NewTodo" />
+                <button type="submit" class="add-btn" id="addTodoBtn">
+                    <span>Add</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </form>
+        <ul class="todo-list">
+            @foreach (var todo in Model.Todos)
+            {
+                <li class="todo-item animate__animated animate__fadeIn">
+                    <input type="checkbox" />
+                    <span>@todo.Title</span>
+                    <form method="post" asp-page-handler="DeleteTodo" asp-route-todoId="@todo.Id">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+</body>
+<script>
+    document.getElementById("newTodoInput").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("addTodoBtn").click();
+        }
+    });
+</script>
+
+</html>
