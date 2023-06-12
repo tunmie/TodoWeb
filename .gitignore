@@ -1,3 +1,5 @@
 ﻿/.idea/
 /TodoWeb/bin
 /TodoWeb/obj
+
+/TodoWeb/.env

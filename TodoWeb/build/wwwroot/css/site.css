@@ -1,0 +1,50 @@
+/* CSS Reset */
+
+/* Box sizing border-box for all elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul {
+  list-style: none;
+}
+
+/* Remove default hyperlink styles */
+a {
+  text-decoration: none;
+}
+
+/* Set default font family and size */
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+}
+
+/* Set default text color */
+body {
+  color: #333;
+}
+
+/* Set default background color */
+body {
+  background-color: #f1f1f1;
+}
