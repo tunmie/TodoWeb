@@ -1,18 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using TodoWeb.Models;
 
 namespace TodoWeb.Data
 {
     public class AppDbContext : DbContext
     {
+        private readonly IConfiguration _configuration;
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration) : base(options)
+        {
+            _configuration = configuration;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Host=containers-us-west-22.railway.app; Port=6460; Database=railway; Username=postgres; Password=hWzQ3q78TcB6V9hSQoUI";
-            optionsBuilder.UseNpgsql(connectionString);
-        }
-        
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         public DbSet<Todo> Todos { get; set; }
